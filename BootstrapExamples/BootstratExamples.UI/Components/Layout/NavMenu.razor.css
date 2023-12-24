@@ -1,0 +1,30 @@
+.navmenu-height {
+  height: 100vh;
+}
+
+.navmenu-items {
+  flex-direction: column;
+}
+
+@media (min-width: 992px) {
+  .navbar-toggler {
+    display: none;
+  }
+
+  .navbar-close {
+    display: none;
+  }
+
+  .navmenu-items {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .navmenu-items ul {
+    margin-right: 1rem;
+  }
+
+  .navmenu-height {
+    height: auto;
+  }
+}

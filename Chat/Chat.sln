@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.0.0
+MinimumVisualStudioVersion = 17.8.0.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.AppHost", "Chat.AppHost\Chat.AppHost.csproj", "{6AEDE192-B453-4C96-BC02-836C4B40347B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.ServiceDefaults", "Chat.ServiceDefaults\Chat.ServiceDefaults.csproj", "{53624641-4F35-4425-85F3-849FE7C54D77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AEDE192-B453-4C96-BC02-836C4B40347B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AEDE192-B453-4C96-BC02-836C4B40347B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AEDE192-B453-4C96-BC02-836C4B40347B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AEDE192-B453-4C96-BC02-836C4B40347B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53624641-4F35-4425-85F3-849FE7C54D77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53624641-4F35-4425-85F3-849FE7C54D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53624641-4F35-4425-85F3-849FE7C54D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53624641-4F35-4425-85F3-849FE7C54D77}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDDFFCF2-C732-4ED8-8825-A7A9DD90B868}
+	EndGlobalSection
+EndGlobal
