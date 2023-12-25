@@ -1,4 +1,6 @@
-﻿<nav class="px-4 mb-3 navbar navbar-expand-lg bg-body-tertiary">
+﻿@rendermode InteractiveServer
+
+<nav class="px-4 mb-3 navbar navbar-expand-lg bg-body-tertiary">
     <div class="p-2">
         <a class="navbar-brand" href="#">Offcanvas</a>
     </div>
@@ -8,7 +10,6 @@
     </button>
     <div class="offcanvas offcanvas-start" tabindex="-1" id="navbarOffcanvasLg"
         aria-labelledby="navbarOffcanvasLgLabel">
-
         <div class="navmenu-height navmenu-items d-flex justify-content-end flex-shrink-0 p-3">
             <div class="offcanvas-header">
                 <a class="navbar-brand" href="#">Offcanvas</a>
@@ -22,13 +23,11 @@
                         <span class="bi bi-house-door-fill" aria-hidden="true"></span> Home
                     </NavLink>
                 </li>
-
                 <li class="nav-item">
                     <NavLink class="nav-link text-white" href="counter">
                         <span class="bi bi-plus-square-fill" aria-hidden="true"></span>
                         Counter
                     </NavLink>
-
                 </li>
                 <li class="nav-item">
                     <NavLink class="nav-link text-white" href="weather">
@@ -37,16 +36,31 @@
                     </NavLink>
                 </li>
             </ul>
-
             <hr />
-
-            <div class="dropdown">
+            <div class="profile-dropdown dropdown">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20">
+                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong>mdo</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-lg-end text-small shadow" style>
+                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+            </div>
+            
+            <div class="profile-dropup dropup">
                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
                     <strong>mdo</strong>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-md-end text-small shadow" style="">
+                <ul class="dropdown-menu dropdown-menu-md-start text-small shadow" style>
                     <li><a class="dropdown-item" href="#">New project...</a></li>
                     <li><a class="dropdown-item" href="#">Settings</a></li>
                     <li><a class="dropdown-item" href="#">Profile</a></li>
@@ -57,6 +71,5 @@
                 </ul>
             </div>
         </div>
-
     </div>
 </nav>

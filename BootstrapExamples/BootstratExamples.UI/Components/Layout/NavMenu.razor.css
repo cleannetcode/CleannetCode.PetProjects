@@ -6,6 +6,10 @@
   flex-direction: column;
 }
 
+.profile-dropdown {
+  display: none;
+}
+
 @media (min-width: 992px) {
   .navbar-toggler {
     display: none;
@@ -20,11 +24,23 @@
     align-items: center;
   }
 
-  .navmenu-items ul {
+  .navmenu-items > ul {
     margin-right: 1rem;
   }
 
   .navmenu-height {
     height: auto;
+  }
+
+  .profile-dropup {
+    display: none;
+  }
+
+  .profile-dropdown {
+    display: inherit;
+  }
+
+  .profile-dropdown > ul {
+    margin-top: 0.5rem;
   }
 }
