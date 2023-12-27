@@ -1,0 +1,59 @@
+@Result
+@Answer
+
+<div class="d-flex flex-row">
+    @for (var i = 0; i < Answer.Length; i++)
+    {
+        var index = i;
+        <input @ref="re[index]" class="form-control" style="width: 45px; text-align: center;" type="text" maxlength="1"
+            @bind="sum[index]" @onkeydown="(e) => OnKeydown(e, index)" @oninput="(e) => OnInputNext(e, index)" />
+    }
+</div>
+
+@code {
+
+    private string _answer = string.Empty;
+    [Parameter]
+    public string Answer
+    {
+        get => _answer;
+        set
+        {
+            re = new ElementReference[value.Length];
+            sum = new string[value.Length];
+            _answer = value;
+        }
+    }
+    private ElementReference[] re { get; set; }
+    private string[] sum { get; set; }
+    private string _inputValue = string.Empty;
+    private bool Result => sum != null && string.Join(string.Empty, sum) == Answer;
+
+    private async Task OnKeydown(KeyboardEventArgs e, int index)
+    {
+        if (e.Key == "Backspace")
+        {
+            if (index > 0)
+            {
+                await re[index - 1].FocusAsync();
+            }
+        }
+
+        if (e.Key.Length == 1)
+        {
+            sum[index] = e.Key;
+            if (index < re.Length - 1)
+            {
+                await re[index + 1].FocusAsync();
+            }
+        }
+    }
+
+    private async Task OnInputNext(ChangeEventArgs e, int index)
+    {
+        if (e.Value is string { Length: > 0 } && index < re.Length - 1)
+        {
+            await re[index + 1].FocusAsync();
+        }
+    }
+}
