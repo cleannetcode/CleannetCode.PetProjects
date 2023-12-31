@@ -11,8 +11,6 @@ main {
   height: 100vh;
   height: -webkit-fill-available;
   max-height: 100vh;
-  /* overflow-x: auto; */
-  /* overflow-y: hidden; */
 }
 
 .dropdown-toggle { outline: 0; }
@@ -56,8 +54,4 @@ main {
 .btn-toggle-nav a:hover,
 .btn-toggle-nav a:focus {
   background-color: var(--bs-tertiary-bg);
-}
-
-.scrollarea {
-  /* overflow-y: auto; */
 }

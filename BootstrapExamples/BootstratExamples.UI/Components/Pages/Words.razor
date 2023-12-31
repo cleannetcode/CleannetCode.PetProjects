@@ -1,0 +1,55 @@
+@page "/words"
+@using System.Text.RegularExpressions;
+@rendermode InteractiveServer
+
+<PageTitle>Words</PageTitle>
+
+@* <button class="btn btn-primary" @onclick="AddCard">Add Card</button> *@
+<form @onsubmit=Enter>
+    <input id="word" placeholder="new word" @bind="newWord" />
+    <button>Add word</button>
+</form>
+<ul>
+    @foreach (var item in words)
+    {
+        <li @key=item>@item.Title </li>
+    }
+</ul>
+
+@if (words.Count > 0)
+{
+    <button @onclick="() => guessWord = GetRandomWord()">Start</button>
+
+    @if (!string.IsNullOrWhiteSpace(guessWord))
+    {
+        <GuessWord Answer="@guessWord" />
+    }
+}
+
+
+@code {
+    private class WordItem { public string Title { get; set; } }
+    private IList<WordItem> words = new List<WordItem>();
+    private string newWord;
+
+    private string guessWord = string.Empty;
+
+    private string GetRandomWord()
+    {
+        var random = new Random();
+        var index = random.Next(words.Count);
+        return words[index].Title;
+    }
+
+
+
+    private void Enter()
+    {
+        if (!string.IsNullOrWhiteSpace(newWord))
+        {
+            words.Add(new WordItem { Title = newWord });
+            newWord = string.Empty;
+        }
+    }
+
+}

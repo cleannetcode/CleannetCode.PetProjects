@@ -1,33 +1,40 @@
-@Result
-@Answer
-
-<div class="d-flex flex-row">
-    @for (var i = 0; i < Answer.Length; i++)
+<div class="d-flex flex-row @CssClass">
+    @if (Answer is { Length: > 0 } && ElementReferences.Length == Answer.Length)
     {
-        var index = i;
-        <input @ref="re[index]" class="form-control" style="width: 45px; text-align: center;" type="text" maxlength="1"
-            @bind="sum[index]" @onkeydown="(e) => OnKeydown(e, index)" @oninput="(e) => OnInputNext(e, index)" />
+        @for (var i = 0; i < Answer.Length; i++)
+        {
+            var index = i;
+            <input @ref="ElementReferences[index]" class="form-control" style="width: 45px; text-align: center;" type="text"
+                maxlength="1" @bind="Characters[index]" @onkeydown="(e) => OnKeydown(e, index)"
+                @oninput="(e) => OnInputNext(e, index)" />
+        }
     }
 </div>
 
 @code {
-
-    private string _answer = string.Empty;
     [Parameter]
-    public string Answer
+    public string Answer { get; set; } = string.Empty;
+    [Parameter]
+    public EventCallback<string> OnValueChange { get; set; }
+    [Parameter]
+    public string CssClass { get; set; } = "";
+
+    private string[] Characters { get; set; } = Array.Empty<string>();
+    private string Result => string.Join("", Characters);
+
+    private ElementReference[] ElementReferences { get; set; } = Array.Empty<ElementReference>();
+    private string _value = string.Empty;
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
     {
-        get => _answer;
-        set
+        if (firstRender && Answer is { Length: > 0 })
         {
-            re = new ElementReference[value.Length];
-            sum = new string[value.Length];
-            _answer = value;
+            ElementReferences = new ElementReference[Answer.Length];
+            Characters = new string[Answer.Length];
+            StateHasChanged();
         }
+        return base.OnAfterRenderAsync(firstRender);
     }
-    private ElementReference[] re { get; set; }
-    private string[] sum { get; set; }
-    private string _inputValue = string.Empty;
-    private bool Result => sum != null && string.Join(string.Empty, sum) == Answer;
 
     private async Task OnKeydown(KeyboardEventArgs e, int index)
     {
@@ -35,25 +42,39 @@
         {
             if (index > 0)
             {
-                await re[index - 1].FocusAsync();
+                Characters[index] = string.Empty;
+                await ElementReferences[index - 1].FocusAsync();
             }
         }
 
         if (e.Key.Length == 1)
         {
-            sum[index] = e.Key;
-            if (index < re.Length - 1)
+            Characters[index] = e.Key;
+            if (index < ElementReferences.Length - 1)
             {
-                await re[index + 1].FocusAsync();
+                await ElementReferences[index + 1].FocusAsync();
             }
+        }
+
+        if (OnValueChange.HasDelegate)
+        {
+            @* await OnValueChange.InvokeAsync(string.Join("", Characters)); *@
+            await OnValueChange.InvokeAsync(Result);
         }
     }
 
     private async Task OnInputNext(ChangeEventArgs e, int index)
     {
-        if (e.Value is string { Length: > 0 } && index < re.Length - 1)
+        if (e.Value is string { Length: > 0 } && index < ElementReferences.Length - 1)
         {
-            await re[index + 1].FocusAsync();
+            await ElementReferences[index + 1].FocusAsync();
+        }
+
+        if (OnValueChange.HasDelegate)
+        {
+            Console.WriteLine(string.Join("", Characters));
+            @* await OnValueChange.InvokeAsync(string.Join("", Characters)); *@
+            await OnValueChange.InvokeAsync(Result);
         }
     }
 }
