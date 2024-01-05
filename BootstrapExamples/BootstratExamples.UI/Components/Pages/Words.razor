@@ -1,55 +1,110 @@
 @page "/words"
-@using System.Text.RegularExpressions;
 @rendermode InteractiveServer
 
 <PageTitle>Words</PageTitle>
 
-@* <button class="btn btn-primary" @onclick="AddCard">Add Card</button> *@
-<form @onsubmit=Enter>
-    <input id="word" placeholder="new word" @bind="newWord" />
-    <button>Add word</button>
+<form @onsubmit=Enter class="mb-3">
+
+    <div class="d-flex mb-3">
+        <input type="text" class="form-control" placeholder="search" @bind-value=newWord @bind-value:event="oninput" />
+    </div>
+
+    <div class="d-flex justify-content-around mb-3 fixed-bottom">
+        <div>
+            @* <button class="btn btn-success">Add</button> *@
+            <a class="btn btn-success align-items-center fs-1">
+                <i class="bi bi-plus-circle-fill"></i>
+                Add
+            </a>
+        </div>
+
+        @* <div>
+        <input type="text" class="form-control" placeholder="search" @bind-value=newWord
+        @bind-value:event="oninput" />
+        </div> *@
+
+        <div>
+            <NavLink class="btn btn-primary align-items-center fs-1" href="words/guess">
+                <i class="bi bi-play-circle-fill"></i>
+                Start
+            </NavLink>
+        </div>
+    </div>
 </form>
-<ul>
+
+<div class="row g-3">
     @foreach (var item in words)
     {
-        <li @key=item>@item.Title </li>
+        <div class="col-xl-3 col-md-6 mb-sm-0">
+            <div class="card h-100">
+                <img src="@item.ImageUrl" class="card-img-top mb-3 object-fit-cover h-50 min-h-25" />
+                <div class="card-body">
+                    <h5 class="card-title">@item.Word</h5>
+                    <p class="card-text">@item.Description</p>
+                    @* <p class="card-text">
+                This is a wider card with supporting text below as a natural lead-in to additional content.
+                This
+                card has even longer content than the first to show that equal height action.
+                </p> *@
+                </div>
+                <div class="card-footer">
+                    Card footer
+                </div>
+            </div>
+        </div>
     }
-</ul>
 
-@if (words.Count > 0)
-{
-    <button @onclick="() => guessWord = GetRandomWord()">Start</button>
+</div>
 
-    @if (!string.IsNullOrWhiteSpace(guessWord))
-    {
-        <GuessWord Answer="@guessWord" />
-    }
-}
 
 
 @code {
-    private class WordItem { public string Title { get; set; } }
-    private IList<WordItem> words = new List<WordItem>();
+    private IList<WordItem> words = new List<WordItem> {
+new WordItem("Apple", "A fruit",
+"https://images.pexels.com/photos/102104/pexels-photo-102104.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2"),
+new WordItem("Banana", "A fruit",
+"https://images.pexels.com/photos/2872755/pexels-photo-2872755.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2"),
+new WordItem("Pen", "A tool",
+"https://images.pexels.com/photos/983826/pexels-photo-983826.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2kj"),
+
+
+new WordItem("Apple", "A fruit",
+"https://images.pexels.com/photos/102104/pexels-photo-102104.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2"),
+new WordItem("Banana", "A fruit",
+"https://images.pexels.com/photos/2872755/pexels-photo-2872755.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2"),
+new WordItem("Pen", "A tool",
+"https://images.pexels.com/photos/983826/pexels-photo-983826.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2kj"),
+
+
+new WordItem("Apple", "A fruit",
+"https://images.pexels.com/photos/102104/pexels-photo-102104.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2"),
+new WordItem("Banana", "A fruit",
+"https://images.pexels.com/photos/2872755/pexels-photo-2872755.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2"),
+new WordItem("Pen", "A tool",
+"https://images.pexels.com/photos/983826/pexels-photo-983826.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2kj"),
+
+
+new WordItem("Apple", "A fruit",
+"https://images.pexels.com/photos/102104/pexels-photo-102104.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2"),
+new WordItem("Banana", "A fruit",
+"https://images.pexels.com/photos/2872755/pexels-photo-2872755.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2"),
+new WordItem("Pen", "A tool",
+"https://images.pexels.com/photos/983826/pexels-photo-983826.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2kj"),
+};
     private string newWord;
 
     private string guessWord = string.Empty;
-
-    private string GetRandomWord()
-    {
-        var random = new Random();
-        var index = random.Next(words.Count);
-        return words[index].Title;
-    }
-
-
 
     private void Enter()
     {
         if (!string.IsNullOrWhiteSpace(newWord))
         {
-            words.Add(new WordItem { Title = newWord });
+            @* words.Add(new WordItem { Title = newWord }); *@
             newWord = string.Empty;
         }
     }
+
+
+    private record WordItem(string Word, string? Description, string ImageUrl);
 
 }
