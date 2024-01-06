@@ -1,0 +1,38 @@
+@page "/words/add"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+@inject ILogger<AddWord> Logger
+
+<div>new word</div>
+
+<form method="post" @onsubmit="Add" @formname="new-word-add">
+    <AntiforgeryToken />
+    <div>
+        <label>
+            Word:
+            <InputText @bind-Value="Model!.Word" />
+        </label>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+
+@code {
+    private WordItem? Model { get; set; }
+
+    protected override void OnInitialized() => Model ??= new();
+
+    private async Task Add()
+    {
+        Logger.LogInformation("Id = {Id}", Model?.Word);
+        NavigationManager.NavigateTo("/words");
+    }
+
+    private class WordItem()
+    {
+        public string Word { get; set; }
+        public string? Description { get; set; }
+        public string ImageUrl { get; set; }
+    }
+}

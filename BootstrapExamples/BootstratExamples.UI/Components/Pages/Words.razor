@@ -3,34 +3,26 @@
 
 <PageTitle>Words</PageTitle>
 
-<form @onsubmit=Enter class="mb-3">
-
-    <div class="d-flex mb-3">
+<div class="row">
+    <form @onsubmit=Enter class="col-xl-3 col-md-6 col-sm-6 mb-3">
         <input type="text" class="form-control" placeholder="search" @bind-value=newWord @bind-value:event="oninput" />
-    </div>
-
-    <div class="d-flex justify-content-around mb-3 fixed-bottom">
-        <div>
-            @* <button class="btn btn-success">Add</button> *@
-            <a class="btn btn-success align-items-center fs-1">
+    </form>
+    <div class="d-flex col-xl-9 col-md-6 col-sm-6 mb-3 word-actions">
+        <div class="me-3">
+            <NavLink class="btn btn-success align-items-center fs-sm-1" href="words/add">
                 <i class="bi bi-plus-circle-fill"></i>
                 Add
-            </a>
+            </NavLink>
         </div>
-
-        @* <div>
-        <input type="text" class="form-control" placeholder="search" @bind-value=newWord
-        @bind-value:event="oninput" />
-        </div> *@
-
         <div>
-            <NavLink class="btn btn-primary align-items-center fs-1" href="words/guess">
+            <NavLink class="btn btn-primary align-items-center fs-sm-1" href="words/guess">
                 <i class="bi bi-play-circle-fill"></i>
-                Start
+                Guess
             </NavLink>
         </div>
     </div>
-</form>
+</div>
+
 
 <div class="row g-3">
     @foreach (var item in words)
@@ -41,11 +33,6 @@
                 <div class="card-body">
                     <h5 class="card-title">@item.Word</h5>
                     <p class="card-text">@item.Description</p>
-                    @* <p class="card-text">
-                This is a wider card with supporting text below as a natural lead-in to additional content.
-                This
-                card has even longer content than the first to show that equal height action.
-                </p> *@
                 </div>
                 <div class="card-footer">
                     Card footer

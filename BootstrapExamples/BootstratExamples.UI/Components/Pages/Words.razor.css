@@ -1,0 +1,14 @@
+.word-actions {
+  justify-content: flex-end;
+}
+
+@media (max-width: 576px) {
+  .word-actions {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+    justify-content: space-between;
+  }
+}

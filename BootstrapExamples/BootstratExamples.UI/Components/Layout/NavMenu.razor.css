@@ -8,9 +8,6 @@
   --bs-nav-link-hover-color: var(--bs-navbar-hover-color);
   --bs-nav-link-disabled-color: var(--bs-navbar-disabled-color);
 }
-li > a:is(.link-body-emphasis, .active) {
-  color: white !important;
-}
 
 .profile-dropdown {
   display: none;
