@@ -4,49 +4,48 @@
 <PageTitle>Words</PageTitle>
 
 <div class="row">
-    <form @onsubmit=Enter class="col-xl-3 col-md-6 col-sm-6 mb-3">
-        <input type="text" class="form-control" placeholder="search" @bind-value=newWord @bind-value:event="oninput" />
-    </form>
-    <div class="d-flex col-xl-9 col-md-6 col-sm-6 mb-3 word-actions">
-        <div class="me-3">
-            <NavLink class="btn btn-success align-items-center fs-sm-1" href="words/add">
-                <i class="bi bi-plus-circle-fill"></i>
-                Add
-            </NavLink>
-        </div>
-        <div>
-            <NavLink class="btn btn-primary align-items-center fs-sm-1" href="words/guess">
-                <i class="bi bi-play-circle-fill"></i>
-                Guess
-            </NavLink>
-        </div>
+  <form @onsubmit=Enter class="col-xl-3 col-md-6 col-sm-6 mb-3">
+    <input type="text" class="form-control" placeholder="search" @bind-value=newWord @bind-value:event="oninput" />
+  </form>
+  <div class="d-flex col-xl-9 col-md-6 col-sm-6 mb-3 word-actions">
+    <div class="me-3">
+      <NavLink class="btn btn-success align-items-center fs-sm-1" href="words/add">
+        <i class="bi bi-plus-circle-fill"></i>
+        Add
+      </NavLink>
     </div>
+    <div>
+      <NavLink class="btn btn-primary align-items-center fs-sm-1" href="words/guess">
+        <i class="bi bi-play-circle-fill"></i>
+        Guess
+      </NavLink>
+    </div>
+  </div>
 </div>
 
-
 <div class="row g-3">
-    @foreach (var item in words)
-    {
-        <div class="col-xl-3 col-md-6 mb-sm-0">
-            <div class="card h-100">
-                <img src="@item.ImageUrl" class="card-img-top mb-3 object-fit-cover h-50 min-h-25" />
-                <div class="card-body">
-                    <h5 class="card-title">@item.Word</h5>
-                    <p class="card-text">@item.Description</p>
-                </div>
-                <div class="card-footer">
-                    Card footer
-                </div>
-            </div>
+  @foreach (var item in words)
+  {
+    <div class="col-xl-3 col-md-6 mb-sm-0">
+      <div class="card h-100">
+        <img src="@item.ImageUrl" class="card-img-top mb-3 object-fit-cover h-50 min-h-25" />
+        <div class="card-body">
+          <h5 class="card-title">@item.Word</h5>
+          <p class="card-text">@item.Description</p>
         </div>
-    }
+        <div class="card-footer">
+          Card footer
+        </div>
+      </div>
+    </div>
+  }
 
 </div>
 
 
 
 @code {
-    private IList<WordItem> words = new List<WordItem> {
+  private IList<WordItem> words = new List<WordItem> {
 new WordItem("Apple", "A fruit",
 "https://images.pexels.com/photos/102104/pexels-photo-102104.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2"),
 new WordItem("Banana", "A fruit",
@@ -78,20 +77,20 @@ new WordItem("Banana", "A fruit",
 new WordItem("Pen", "A tool",
 "https://images.pexels.com/photos/983826/pexels-photo-983826.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2kj"),
 };
-    private string newWord;
+  private string newWord;
 
-    private string guessWord = string.Empty;
+  private string guessWord = string.Empty;
 
-    private void Enter()
+  private void Enter()
+  {
+    if (!string.IsNullOrWhiteSpace(newWord))
     {
-        if (!string.IsNullOrWhiteSpace(newWord))
-        {
-            @* words.Add(new WordItem { Title = newWord }); *@
-            newWord = string.Empty;
-        }
+      @* words.Add(new WordItem { Title = newWord }); *@
+      newWord = string.Empty;
     }
+  }
 
 
-    private record WordItem(string Word, string? Description, string ImageUrl);
+  private record WordItem(string Word, string? Description, string ImageUrl);
 
 }
